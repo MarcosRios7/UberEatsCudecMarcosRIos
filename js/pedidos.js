@@ -61,10 +61,7 @@ function exito(posicion){
    })
    .then(respuesta => respuesta.json())
    .then(data=>{
-    // 1. Select the input element using its ID
     const inputDireccion = document.getElementById('direccionPedido');
-    
-    // 2. Assign the address string to the input's value
     if (inputDireccion) {
         inputDireccion.value = data.display_name;
     }
@@ -75,3 +72,5 @@ function error(error){
     alert("Ha habido un error");
     console.log(error);
 }
+
+
