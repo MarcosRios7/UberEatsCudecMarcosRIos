@@ -48,3 +48,27 @@ function agregarALista(platillo, id) {
   `;
 
 }
+
+//El tamaño de ancho del cuadro cuando se abra la camara
+let streaming = false;
+const width = 320;
+let height = 0;
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const foto = document.getElementById('foto');
+const btnFoto = document.getElementById('btnFoto');
+
+btnFoto.addEventListener("click", function(){
+  navigator.mediaDevices
+  .getUserMedia({
+    video: true,
+    audio:false
+  })
+  .then((stream)=>{
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+})

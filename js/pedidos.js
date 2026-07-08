@@ -65,8 +65,15 @@ function exito(posicion){
     if (inputDireccion) {
         inputDireccion.value = data.display_name;
     }
-})
-   .catch(error => console.error(error));
+
+var map = L.map('mapa').setView([latitude, longitude], 15)
+   
+   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' 
+}).addTo(map);
+var marker = L.marker([latitude, longitude]).addTo(map)})
+.catch(error => console.error(error));
 }
 function error(error){
     alert("Ha habido un error");
