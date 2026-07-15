@@ -10,10 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function mostrarPlatillo(platillo, id) {
+  let fotoPlatillo;
+  if (platillo.foto) { 
+        fotoPlatillo = "data:image/png;base64, " + platillo.foto;
+    }
+ else {
+    fotoPlatillo = "img/Comida_def.jpg";
+}
   contenido = `
     <div class='card-panel recipe white row' id='${id}' data-id='${id}'>
+        <img src="${fotoPlatillo}" height="100px" width="500px"> 
         <div class='recipe-details'>
-
           <div class='recipe-title'>${platillo.nombre}</div>
           <div class='recipe-ingredients'>${platillo.ingredientes}</div>
           <div class='recipe-precio'>Precio: $${platillo.precio} MXN</div>
@@ -72,3 +79,39 @@ btnFoto.addEventListener("click", function(){
     console.log(error);
   });
 })
+
+video.addEventListener('canplay', function() {
+  if (!streaming) {
+      // Calcula la proporción matemática para que la foto no se vea estirada
+      height = video.videoHeight / (video.videoWidth / width);
+      
+      video.setAttribute("width", width);
+      video.setAttribute("height", height);
+      canvas.setAttribute("width", width);
+      canvas.setAttribute("height", height);
+      streaming = true;
+  }
+}, false);
+
+function tomarFoto() {
+  const contexto = canvas.getContext("2d");
+  if (width && height) {
+      canvas.width = width;
+      canvas.height = height;
+      contexto.drawImage(video, 0, 0, width, height);
+      const fotoFinal = canvas.toDataURL("image/png");
+      foto.setAttribute("src", fotoFinal);
+      document.getElementById("fotoFinal").value = fotoFinal;
+  } else {
+      limpiarFoto();
+  }
+}
+
+// Función de respaldo por si no hay cámara activa
+function limpiarFoto() {
+  const contexto = canvas.getContext('2d');
+  contexto.fillStyle = "#AAA";
+  contexto.fillRect(0, 0, canvas.width, canvas.height);
+  const data = canvas.toDataURL('image/png');
+  foto.setAttribute('src', data);
+}
