@@ -17,7 +17,7 @@ function mostrarPlatillo(platillo, id) {
  else {
     fotoPlatillo = "img/Comida_def.jpg";
 }
-  contenido = `
+  const contenido = `
     <div class='card-panel recipe white row' id='${id}' data-id='${id}'>
         <img src="${fotoPlatillo}" height="100px" width="500px"> 
         <div class='recipe-details'>
@@ -35,6 +35,8 @@ function mostrarPlatillo(platillo, id) {
     </div>
   `;
     document.querySelector(".recipes").innerHTML += contenido;
+
+    limpiarFoto();
 };
 
 function actualizarPlatillo(platillo,id){
