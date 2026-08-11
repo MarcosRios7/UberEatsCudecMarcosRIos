@@ -1,9 +1,12 @@
 {
     "name": "Uber Eats Cudec Marcos Rios",
-    "theme_color": "rgb(255, 136, 22)",
     "short_name": "UECMR",
+    "start_url": "./",
+    "scope": "./",
     "display": "standalone",
     "orientation": "portrait",
+    "background_color": "rgb(15, 23, 42)",
+    "theme_color": "rgb(255, 136, 22)",
     "icons": [
       {
         "src": "iconos/icon-16x16.png",
