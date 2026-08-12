@@ -66,47 +66,63 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const foto = document.getElementById('foto');
 const btnFoto = document.getElementById('btnFoto');
+const btnTomarFoto = document.getElementById('btnTomarFoto'); // Referencia al nuevo botón
 
-btnFoto.addEventListener("click", function(){
+// Botón 1: Abrir/Iniciar cámara
+btnFoto.addEventListener("click", function(e) {
+  e.preventDefault();
   navigator.mediaDevices
-  .getUserMedia({
-    video: true,
-    audio:false
-  })
-  .then((stream)=>{
-    video.srcObject = stream;
-    video.play();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-})
+    .getUserMedia({
+      video: true,
+      audio: false
+    })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.play();
+    })
+    .catch((error) => {
+      console.log("Error al acceder a la cámara:", error);
+    });
+});
+
+// Botón 2: Event listener para disparar la foto
+btnTomarFoto.addEventListener("click", function(e) {
+  e.preventDefault();
+  tomarFoto();
+});
 
 video.addEventListener('canplay', function() {
   if (!streaming) {
-      // Calcula la proporción matemática para que la foto no se vea estirada
-      height = video.videoHeight / (video.videoWidth / width);
-      
-      video.setAttribute("width", width);
-      video.setAttribute("height", height);
-      canvas.setAttribute("width", width);
-      canvas.setAttribute("height", height);
-      streaming = true;
+    height = video.videoHeight / (video.videoWidth / width);
+    
+    video.setAttribute("width", width);
+    video.setAttribute("height", height);
+    canvas.setAttribute("width", width);
+    canvas.setAttribute("height", height);
+    streaming = true;
   }
 }, false);
 
 function tomarFoto() {
   const contexto = canvas.getContext("2d");
   if (width && height) {
-      canvas.width = width;
-      canvas.height = height;
-      contexto.drawImage(video, 0, 0, width, height);
-      const fotoFinal = canvas.toDataURL("image/png");
-      foto.setAttribute("src", fotoFinal);
-      document.getElementById("fotoFinal").value = fotoFinal;
+    canvas.width = width;
+    canvas.height = height;
+    contexto.drawImage(video, 0, 0, width, height);
+    const fotoFinal = canvas.toDataURL("image/png");
+    foto.setAttribute("src", fotoFinal);
+    document.getElementById("fotoFinal").value = fotoFinal;
   } else {
-      limpiarFoto();
+    limpiarFoto();
   }
+}
+
+function limpiarFoto() {
+  const contexto = canvas.getContext('2d');
+  contexto.fillStyle = "#AAA";
+  contexto.fillRect(0, 0, canvas.width, canvas.height);
+  const data = canvas.toDataURL('image/png');
+  foto.setAttribute('src', data);
 }
 
 // Función de respaldo por si no hay cámara activa

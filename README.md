@@ -10,5 +10,6 @@
 
 ## Taller de programacion avanzada II, Marcos E. Rios Osornio.
 
-
 # Descripción del proyecto:
+
+Con esta aplicacion "atacamos" la problematica en

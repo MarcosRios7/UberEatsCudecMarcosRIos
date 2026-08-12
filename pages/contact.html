@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Food Ninja</title>
+  <title>Proyecto</title>
   <!-- materialize icons, css & js -->
   <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -54,7 +54,7 @@
   <!-- top nav -->
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
-      <a href="/">Food<span>Ninja</span></a>
+      <a href="/">Proyecto</span></a>
       <span class="right grey-text text-darken-1">
         <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
       </span>
@@ -74,15 +74,74 @@
   </ul>
 
   <!-- content -->
-  <div class="container grey-text">
-    <h5 class="center">Contact Us</h5>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, porro voluptatum illum veniam eaque sunt sit labore provident eligendi! Voluptate amet suscipit inventore unde maxime atque impedit officia nobis laboriosam!</p>
-    <div class="divider"></div>
-    <h6>Find us at:</h6>
-    <ul>
-      <li>123 Spicy Noodle Road</li>
-      <li>Manchester, UK</li>
-    </ul>
+  <div class="container section">
+    <h4 class="center orange-text text-darken-2">Contacto y Soporte</h4>
+    <p class="center grey-text text-darken-1">
+      ¿Tienes dudas, sugerencias o algún problema con tu pedido? Ponte en contacto con el equipo de soporte de CUDEC.
+    </p>
+  
+    <div class="row section">
+      <!-- Formulario de contacto -->
+      <div class="col s12 l7">
+        <div class="card-panel white z-depth-1">
+          <h5 class="grey-text text-darken-2">Envíanos un mensaje</h5>
+          <form>
+            <div class="input-field">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" class="validate">
+              <label for="icon_prefix">Nombre completo</label>
+            </div>
+  
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input id="icon_email" type="email" class="validate">
+              <label for="icon_email">Correo</label>
+            </div>
+  
+            <div class="input-field">
+              <i class="material-icons prefix">mode_edit</i>
+              <textarea id="icon_telephone" class="materialize-textarea"></textarea>
+              <label for="icon_telephone">Mensaje o comentarios</label>
+            </div>
+  
+            <div class="center">
+              <button class="btn waves-effect waves-light orange darken-2" type="button">
+                Enviar Mensaje
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+      <!-- Información de contacto rápida -->
+      <div class="col s12 l5">
+        <div class="card-panel grey lighten-4 z-depth-1">
+          <h5 class="grey-text text-darken-2">Información</h5>
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i class="material-icons circle orange">location_on</i>
+              <span class="title"><strong>Ubicación</strong></span>
+              <p>Universidad CUDEC</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle orange">access_time</i>
+              <span class="title"><strong>Horario de Atención</strong></span>
+              <p>Lunes a Viernes<br>7:00 AM - 9:30 PM</p>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle orange">help_outline</i>
+              <span class="title"><strong>Desarrollado por</strong></span>
+              <p>Marcos E. Rios Osornio</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <div class="center">
+      <a href="../index.html" class="btn waves-effect waves-light orange darken-2">Volver al Inicio</a>
+    </div>
   </div>
 
   <script src="../js/index.js"></script>

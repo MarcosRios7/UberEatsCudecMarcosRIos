@@ -106,14 +106,28 @@
         <button class="btn-small">Agregar</button>
       </div>
     </form>
-    <div class="input-field center">
-    <button id="btnFoto">Imagen</button>
-    <div id="camara">
-      <video id="video">No hay video disponible</video>
-    </div>
-    <canvas id="canvas"></canvas>
-    <div id="salida">
-      <img id="foto" src="" alt="">
+    
+    <div class="container section center">
+      <div class="row">
+        <!-- Botón 1: Iniciar cámara -->
+        <button id="btnFoto" class="btn-small orange darken-1 waves-effect waves-light">
+          <i class="material-icons left">videocam</i>Abrir Cámara
+        </button>
+        <!-- Botón 2: Tomar foto (Nuevo) -->
+        <button id="btnTomarFoto" class="btn-small green darken-1 waves-effect waves-light">
+          <i class="material-icons left">camera_alt</i>Tomar Foto
+        </button>
+      </div>
+
+      <div id="camara" class="section">
+        <video id="video" autoplay style="width: 100%; max-width: 320px; display: block; margin: 0 auto;">No hay video disponible</video>
+      </div>
+
+      <canvas id="canvas" style="display: none;"></canvas>
+
+      <div id="salida" class="section">
+        <img id="foto" src="" alt="Vista previa de la foto" style="width: 100%; max-width: 320px;">
+      </div>
     </div>
   </div>
 
