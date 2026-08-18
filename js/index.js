@@ -62,56 +62,70 @@ function agregarALista(platillo, id) {
 let streaming = false;
 const width = 320;
 let height = 0;
+
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const foto = document.getElementById('foto');
 const btnFoto = document.getElementById('btnFoto');
-const btnTomarFoto = document.getElementById('btnTomarFoto'); // Referencia al nuevo botón
+const btnTomarFoto = document.getElementById('btnTomarFoto');
+const inputFotoFinal = document.getElementById('fotoFinal');
 
 // Botón 1: Abrir/Iniciar cámara
-btnFoto.addEventListener("click", function(e) {
+btnFoto.addEventListener('click', async function(e) {
   e.preventDefault();
-  navigator.mediaDevices
-    .getUserMedia({
+  
+  // Detener stream previo si ya existía uno activo
+  if (video.srcObject) {
+    video.srcObject.getTracks().forEach(track => track.stop());
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: false
-    })
-    .then((stream) => {
-      video.srcObject = stream;
-      video.play();
-    })
-    .catch((error) => {
-      console.log("Error al acceder a la cámara:", error);
     });
+    video.srcObject = stream;
+    await video.play();
+  } catch (error) {
+    console.error('Error al acceder a la cámara:', error);
+  }
 });
 
-// Botón 2: Event listener para disparar la foto
-btnTomarFoto.addEventListener("click", function(e) {
-  e.preventDefault();
-  tomarFoto();
-});
-
+// Ajustar dimensiones del canvas y video cuando el stream esté listo
 video.addEventListener('canplay', function() {
   if (!streaming) {
-    height = video.videoHeight / (video.videoWidth / width);
+    // Si no se puede calcular la proporción, usar relación 4:3 por defecto
+    height = video.videoHeight / (video.videoWidth / width) || width * (3 / 4);
+
+    video.setAttribute('width', width);
+    video.setAttribute('height', height);
+    canvas.setAttribute('width', width);
+    canvas.setAttribute('height', height);
     
-    video.setAttribute("width", width);
-    video.setAttribute("height", height);
-    canvas.setAttribute("width", width);
-    canvas.setAttribute("height", height);
     streaming = true;
   }
 }, false);
 
+// Botón 2: Disparar la foto
+btnTomarFoto.addEventListener('click', function(e) {
+  e.preventDefault();
+  tomarFoto();
+});
+
 function tomarFoto() {
-  const contexto = canvas.getContext("2d");
-  if (width && height) {
+  const contexto = canvas.getContext('2d');
+  
+  if (streaming && width && height) {
     canvas.width = width;
     canvas.height = height;
     contexto.drawImage(video, 0, 0, width, height);
-    const fotoFinal = canvas.toDataURL("image/png");
-    foto.setAttribute("src", fotoFinal);
-    document.getElementById("fotoFinal").value = fotoFinal;
+
+    const fotoFinal = canvas.toDataURL('image/png');
+    foto.setAttribute('src', fotoFinal);
+    
+    if (inputFotoFinal) {
+      inputFotoFinal.value = fotoFinal;
+    }
   } else {
     limpiarFoto();
   }
@@ -119,17 +133,9 @@ function tomarFoto() {
 
 function limpiarFoto() {
   const contexto = canvas.getContext('2d');
-  contexto.fillStyle = "#AAA";
-  contexto.fillRect(0, 0, canvas.width, canvas.height);
-  const data = canvas.toDataURL('image/png');
-  foto.setAttribute('src', data);
-}
-
-// Función de respaldo por si no hay cámara activa
-function limpiarFoto() {
-  const contexto = canvas.getContext('2d');
-  contexto.fillStyle = "#AAA";
-  contexto.fillRect(0, 0, canvas.width, canvas.height);
+  contexto.fillStyle = '#AAA';
+  contexto.fillRect(0, 0, canvas.width || width, canvas.height || width * (3 / 4));
+  
   const data = canvas.toDataURL('image/png');
   foto.setAttribute('src', data);
 }
