@@ -107,28 +107,46 @@
       </div>
     </form>
     
-    <div class="container section center">
-      <div class="row">
-        <!-- Botón 1: Iniciar cámara -->
-        <button id="btnFoto" class="btn-small orange darken-1 waves-effect waves-light">
-          <i class="material-icons left">videocam</i>Abrir Cámara
-        </button>
-        <!-- Botón 2: Tomar foto (Nuevo) -->
-        <button id="btnTomarFoto" class="btn-small green darken-1 waves-effect waves-light">
-          <i class="material-icons left">camera_alt</i>Tomar Foto
-        </button>
-      </div>
+<div class="container section center">
+  <!-- Botones de acción -->
+  <div class="row">
+    <!-- Botón 1: Iniciar cámara -->
+    <button id="btnFoto" type="button" class="btn-small orange darken-1 waves-effect waves-light">
+      <i class="material-icons left">videocam</i>Abrir Cámara
+    </button>
+    
+    <!-- Botón 2: Tomar foto -->
+    <button id="btnTomarFoto" type="button" class="btn-small orange darken-1 waves-effect waves-light">
+      <i class="material-icons left">camera_alt</i>Tomar Foto
+    </button>
+  </div>
 
-      <div id="camara" class="section">
-        <video id="video" autoplay style="width: 100%; max-width: 320px; display: block; margin: 0 auto;">No hay video disponible</video>
-      </div>
+  <!-- Vista previa de la cámara -->
+  <div id="camara" class="section">
+    <video 
+      id="video" 
+      autoplay 
+      playsinline 
+      muted 
+      style="width: 100%; max-width: 320px; display: block; margin: 0 auto; background-color: #000;">
+      No hay video disponible
+    </video>
+  </div>
 
-      <canvas id="canvas" style="display: none;"></canvas>
+  <!-- Canvas oculto para procesar la captura -->
+  <canvas id="canvas" style="display: none;"></canvas>
 
-      <div id="salida" class="section">
-        <img id="foto" src="" alt="Vista previa de la foto" style="width: 100%; max-width: 320px;">
-      </div>
-    </div>
+  <!-- Salida / Vista previa de la foto capturada -->
+  <div id="salida" class="section">
+    <img 
+      id="foto" 
+      alt="Vista previa de la foto" 
+      style="width: 100%; max-width: 320px; display: none; margin: 0 auto;">
+  </div>
+
+  <!-- Input oculto para enviar en un formulario si es necesario -->
+  <input type="hidden" id="fotoFinal" name="fotoFinal">
+</div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js">
